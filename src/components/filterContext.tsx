@@ -1,27 +1,27 @@
-
-import { createContext, useContext, useState, ReactNode } from "react"
+import { createContext, useContext, useState } from "react";
+import type { ReactNode } from "react";
 
 interface FilterContextType {
   searchQuery: string;
   setSearchQuery: (value: string) => void;
   selectedCategory: string;
   setSelectedCategory: (value: string) => void;
-  MinPrice: number;
+  minPrice: number;
   setMinPrice: (value: number) => void;
-  MaxPrice: number;
+  maxPrice: number;
   setMaxPrice: (value: number) => void;
-  Keyword: string;
+  keyword: string;
   setKeyword: (value: string) => void;
 }
 
-const FilterContext = createContext<FilterContextType | undefined>(undefined)
+const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
 export const FilterProvider = ({ children }: { children: ReactNode }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("")
-  const [MinPrice, setMinPrice] = useState(0)
-  const [MaxPrice, setMaxPrice] = useState(9999)
-  const [Keyword, setKeyword] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(9999);
+  const [keyword, setKeyword] = useState("");
 
   return (
     <FilterContext.Provider
@@ -30,11 +30,11 @@ export const FilterProvider = ({ children }: { children: ReactNode }) => {
         setSearchQuery,
         selectedCategory,
         setSelectedCategory,
-        MinPrice,
+        minPrice,
         setMinPrice,
-        MaxPrice,
+        maxPrice,
         setMaxPrice,
-        Keyword,
+        keyword,
         setKeyword,
       }}
     >
@@ -43,10 +43,11 @@ export const FilterProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useFilter = () => {
-  const context = useContext(FilterContext)
+  const context = useContext(FilterContext);
   if (!context) {
-    throw new Error("useFilter must be used within a FilterProvider")
+    throw new Error("useFilter must be used within a FilterProvider");
   }
-  return context
-}
+  return context;
+};

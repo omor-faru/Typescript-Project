@@ -5,7 +5,7 @@ import axios from "axios";
 import BookCard from "./BookCard";
 
 const MainContent = () => {
-  const { searchQuery, selectedCategory, MinPrice, MaxPrice, Keyword } = useFilter();
+  const { searchQuery, selectedCategory, minPrice, maxPrice, keyword } = useFilter();
   const [products, setProducts] = useState<any[]>([]);
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,8 +15,8 @@ const MainContent = () => {
   useEffect(() => {
     let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${(currentPage - 1) * itemsPerPage}`;
 
-    if (Keyword) {
-      url = `https://dummyjson.com/products/search?q=${Keyword}`;
+    if (keyword) {
+      url = `https://dummyjson.com/products/search?q=${keyword}`;
     }
 
     axios
@@ -27,7 +27,7 @@ const MainContent = () => {
       .catch((error) => {
         console.error("Error fetching data", error);
       });
-  }, [currentPage, Keyword]);
+  }, [currentPage, keyword]);
 
   const getFilteredProducts = () => {
     let FilteredProducts = [...products];
@@ -38,15 +38,15 @@ const MainContent = () => {
       );
     }
 
-    if (MinPrice !== undefined) {
+    if (minPrice !== undefined) {
       FilteredProducts = FilteredProducts.filter(
-        (product) => product.price >= MinPrice
+        (product) => product.price >= minPrice
       );
     }
 
-    if (MaxPrice !== undefined) {
+    if (maxPrice !== undefined) {
       FilteredProducts = FilteredProducts.filter(
-        (product) => product.price <= MaxPrice
+        (product) => product.price <= maxPrice
       );
     }
 
@@ -182,4 +182,3 @@ const MainContent = () => {
 };
 
 export default MainContent;
-

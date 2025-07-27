@@ -25,4 +25,3 @@ const BookCard: React.FC<BookCardProps> = ({ id, title, image, price }) => {
 }
 
 export default BookCard
-
