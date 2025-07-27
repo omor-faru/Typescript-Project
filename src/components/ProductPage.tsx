@@ -22,7 +22,9 @@ const [product, setProduct] = useState<Product | null>(null)
 
 useEffect(() => {
      if (id) {
-        axios.get<Product>(`https://dummyjson.com/products/${id}`).then((Response) => {
+        axios
+        .get<Product>(`https://dummyjson.com/products/${id}`)
+        .then((Response) => {
             setProduct(Response.data)
         }).catch((error) => {
             console.error(`Error fatching product data: ${error}`)
@@ -56,3 +58,10 @@ if (!product) {
 }
 
 export default ProductPage
+
+
+
+
+
+
+
